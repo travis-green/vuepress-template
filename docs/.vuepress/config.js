@@ -3,59 +3,27 @@ module.exports = {
   locales: {
     // 键名是该语言所属的子路径
     // 作为特例，默认语言可以使用 '/' 作为其路径。
-    '/zh/': {
+    '/': {
       lang: 'zh-CN',
       title: 'Travis 个人博客',
       description: '陶启航的博客'
-    },
-    '/': {
-      lang: 'en-US', // 将会被设置为 <html> 的 lang 属性
-      title: 'Travis Blog',
-      description: 'Travis Blog'
     }
   },
   plugins: [
     '@vuepress/back-to-top',
-    ['qrcode',{
+    ['qrcode', {
       // "/" and "/zh/" correspond to the path set by locales
-        labelText: {
-          "/": "QRCode", 
-          "/zh/": "二维码",
-        },
-        size:'small',
-        channel:true
+      labelText: {
+        "/": "二维码"
+      },
+      size: 'small',
+      channel: true
     }]
   ],
   themeConfig: {
 
     locales: {
       '/': {
-        selectText: 'Languages',
-        label: 'English',
-        ariaLabel: 'Languages',
-        editLinkText: 'Edit this page on GitHub',
-        serviceWorker: {
-          updatePopup: {
-            message: "New content is available.",
-            buttonText: "Refresh"
-          }
-        },
-        algolia: {},
-        nav: [
-          { text: 'Guide', link: '/guide/', ariaLabel: 'Guide' },
-          { text: 'Resource', link: '/resource/', ariaLabel: 'Resource' },
-					{ text: 'Github', link: 'https://github.com/openHacking/vuepress-template' }
-        ],
-        sidebar: {
-          '/guide/': [
-            '',
-            'theme',
-            'plugin'
-          ],
-          '/resource/': [],
-        }
-      },
-      '/zh/': {
         // 多语言下拉菜单的标题
         selectText: '选择语言',
         // 该语言在下拉菜单中的标签
@@ -72,20 +40,57 @@ module.exports = {
         // 当前 locale 的 algolia docsearch 选项
         algolia: {},
         nav: [
-          { text: '指南', link: '/zh/guide/', ariaLabel: '指南' },
-          { text: '资源', link: '/zh/resource/', ariaLabel: '资源' },
-					{ text: 'Github', link: 'https://github.com/openHacking/vuepress-template' }
+          { text: '前端', link: '/zh/guide/', ariaLabel: '指南' },
+          { text: '后端', link: '/zh/resource/', ariaLabel: '资源' },
+          { text: 'Github', link: 'https://github.com/travis-green' },
+          { text: '个人网站', link: 'https://forum.alipay.com/developer/1100222333' },
+          { text: '微信社区', link: 'https://developers.weixin.qq.com/community/personal/oCJUsw0kGA9yI6HZLQmlfwr5XKKA' },
+          { text: '支付宝社区', link: 'https://forum.alipay.com/developer/1100222' }
         ],
         sidebar: {
           '/zh/guide/': [
             '',
             'theme',
-            'plugin'
+            'plugin',
+            'jsDom',
+            'buildcli',
+            'proxy',
           ],
-          '/zh/resource/': [],
+          '/zh/resource/': [
+            '',
+            'server',
+            'sql'
+          ],
         }
       }
     }
   },
-  
+
 }
+
+// '/': {
+//   selectText: 'Languages',
+//   label: 'English',
+//   ariaLabel: 'Languages',
+//   editLinkText: 'Edit this page on GitHub',
+//   serviceWorker: {
+//     updatePopup: {
+//       message: "New content is available.",
+//       buttonText: "Refresh"
+//     }
+//   },
+//   algolia: {},
+//   nav: [
+//     { text: 'Guide', link: '/guide/', ariaLabel: 'Guide' },
+//     { text: 'Resource', link: '/resource/', ariaLabel: 'Resource' },
+//     { text: 'Github', link: 'https://github.com/openHacking/vuepress-template' }
+//   ],
+//   sidebar: {
+//     '/guide/': [
+//       '',
+//       'theme',
+//       'plugin'
+//     ],
+//     '/resource/': [],
+//   }
+// },
