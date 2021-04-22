@@ -17,7 +17,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "docs:dev": "vuepress dev docs",
+    "docs:dev": "vuepress dev docs --open",
     "docs:build": "vuepress build docs"
   },
   "devDependencies": {
