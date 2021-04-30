@@ -1,161 +1,203 @@
-# 什么是 JS 闭包
+# 如何写一个自己专属的脚手架
 
 ----
-##JavaScript的闭包
+**<p align="right">「如何写一个自己的脚手架 一键初始化项目」</p>**
 
+**介绍：**
+ 
+脚手架的作用：为减少重复性工作而做的重复性工作，构建项目需要的基本模板，打造适用于自己开发习惯的脚手架。
 
-----------
-**首先声明，这是一篇面向小白的博客，不过也欢迎各位大牛批评指正,谢谢。**
+>即为了开发中的：编译 es6，js 模块化，压缩代码，热更新等功能，我们使用webpack等打包工具，但是又带来了新的问题：初始化工程的麻烦，复杂的webpack配置，以及各种配置文件，所以就有了一键生成项目，自定义配置开发的脚手架。
 
-&nbsp;&nbsp;其实关于闭包各个论坛社区里都有很多的文章来讲它，毕竟闭包是JavaScript中一个特色，也正因为这个雨中不同的特色也让闭包理解起来有一些吃力。笔者在这里不仅仅是想介绍闭包，也向列举一些笔者所见过的一些闭包，如果有读者还有一些比较经典的闭包例子，希望可以在评论区里留一下，谢谢。
+**期望：** 
 
-**说了半天，究竟什么是闭包呢？**
+在命令行执行输入 my-cli create text-project，回车后直接创建项目并生成模板，还会把依赖都下载好，下面就开始教你如何实现一个脚手架：
 
- - 闭包就是函数的局部变量集合，只是这些局部变量在函数返回后会继续存在。
- - 闭包就是就是函数的“堆栈”在函数返回后并不释放，我们也可以理解为这些函数堆栈并不在栈上分配而是在堆上分配。
- -  当在一个函数内定义另外一个函数就会产生闭包。
+**1、创建项目 my-cli，执行 npm init -y 快速初始化项目**
 
-**为了便于理解，我们可以简单的将闭包理解为：**
+生成如下的package.json 文件结构，我们在文件中间添加 
 
- - 闭包：是指有权访问另外一个函数作用域中的变量的函数。
- - 
-###JavaScript中的作用域
+（用处:用来指定各个内部命令对应的可执行文件的位置）
 
-
-----------
-
-&nbsp;&nbsp;**JavaScript中是没有块级作用域的。不过关于块级作用域我们在这里不做深入探究，笔者在<a>http://segmentfault.com/a/1190000004092842M</a>中有对块级作用域较为详细的解释，不懂的读者可以去看看。**
-
->变量的作用域无非就是两种：全局变量和局部变量。
->Javascript语言的特殊之处，就在于函数内部可以直接读取全局变量。
-```
-　  var n=999;
-　　function f1(){
-　　　　alert(n);
-　　}
-　　f1(); // 999
-```
-**如上函数，f1可调用全局变量n**
-
-另一方面，在函数外部自然无法读取函数内的局部变量。
+> "bin": { 
+    "my-cli": "bin.js"  //key 值随意自定义
+  }
 
 ```
-function f1(){
-　　　　var n=999;
-　　}
-　　alert(n); // error
+<script>
+  {
+    "name": "clitest",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "bin": {  
+      "my-cli": "lib/bin.js" 
+    }, 
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+  }
+</script>
 ```
-**这里有一个地方需要注意，函数内部声明变量的时候，一定要使用var命令。如果不用的话，你实际上声明了一个全局变量。**
+
+接下来我们创建一个lib文件夹，用于存放bin.js。
+
+>mkdir lib && cd lib && vim bin.js ，并把下面内容粘贴进去，保存。
+
+bin.js 内容如下
+```
+#!/usr/bin/env node
+
+console.log(process.argv);
 
 ```
-function f1(){
-　　　　n=999;
-　　}
-　　f1();
-　　alert(n); // 999
+
+>#!/usr/bin/env node，这一行是必须加的，就是让系统动态的去全局环境中查找node来执行你的脚本文件。
+
+接下来命令行执行 npm link ，创建软链接至全局，这样我们就可以全局使用my-cli命令了，在开发 npm 包的前期都会使用link方式在其他项目中测试来开发，后期再发布到npm上
+
+在控制台看到类似如下输出。
 
 ```
-
-###闭包
-
-**1.理解闭包**
-
-**我们已经理解了什么是作用域，什么是块级作用域，那又该如何去访问函数内部的变量呢？**
-
-出于种种原因，我们有时候需要得到函数内的局部变量。但是，前面已经说过了，正常情况下，这是办不到的，只有通过变通方法才能实现。
+up to date in 0.264s
+/usr/local/bin/my-cli -> /usr/local/lib/node_modules/clitest/lib/bin.js
+/usr/local/lib/node_modules/clitest -> /Users/travis/Documents/GitHub2/clitest
 ```
-　function f1(){
-　　　　var n=999;
-　　　　function f2(){
-　　　　　　alert(n);
-　　　　　　} 
-       return f2;
-　　}
-　var result=f1();
-　result();// 弹出999
-```
-**上面函数中的f2函数就是闭包，就是通过建立函数来访问函数内部的局部变量。**
 
-**2.闭包的用途**
-&nbsp;&nbsp;闭包可以用在许多地方。它的最大用处有两个，一个是前面提到的可以读取函数内部的变量，另一个就是让这些变量的值始终保持在内存中。
-```
-　　function f1(){
-　　　　var n=999;
-　　　　nAdd=function(){n+=1}
-　　　　function f2(){
-　　　　　　alert(n);
-　　　　}
-　　　　return f2;
-　　}
-　　var result=f1();
-　　result(); // 999
-　　nAdd();
-　　result(); // 1000
-```
-**在这段代码中，result实际上就是闭包f2函数。它一共运行了两次，第一次的值是999，第二次的值是1000。这证明了，函数f1中的局部变量n一直保存在内存中，并没有在f1调用后被自动清除。**
+我们紧接着在命令行执行 my-cli 1 2 3
 
-**为什么会这样呢？原因就在于f1是f2的父函数，而f2被赋给了一个全局变量，这导致f2始终在内存中，而f2的存在依赖于f1，因此f1也始终在内存中，不会在调用结束后，被垃圾回收机制（garbage collection）回收。**
+>输出：[ '/usr/local/bin/node', '/usr/local/bin/my-cli', '1', '2', '3' ]。
 
-**这段代码中另一个值得注意的地方，就是"nAdd=function(){n+=1}"这一行，首先在nAdd前面没有使用var关键字，因此nAdd是一个全局变量，而不是局部变量。其次，nAdd的值是一个匿名函数（anonymous function），而这个匿名函数本身也是一个闭包，所以nAdd相当于是一个setter，可以在函数外部对函数内部的局部变量进行操作。**
+这样我们就可以获取到用户的输入参数，我们换成常用的脚手架构建方式：my-cli create test-project
 
-**3.闭包的注意点**
->1）由于闭包会使得函数中的变量都被保存在内存中，内存消耗很大，所以不能滥用闭包，否则会造成网页的性能问题，在IE中可能导致内存泄露。解决方法是，在退出函数之前，将不使用的局部变量全部删除。
->
->2）闭包会在父函数外部，改变父函数内部变量的值。所以，如果你把父函数当作对象（object）使用，把闭包当作它的公用方法（Public Method），把内部变量当作它的私有属性（private value），这时一定要小心，不要随便改变父函数内部变量的值。
+```
+clitest my-cli create test-project
+[
+  '/usr/local/bin/node',
+  '/usr/local/bin/my-cli',
+  'create',
+  'test-project'
+]
+```
 
-**4.经典闭包小案例**
+以上我们就可以通过数组第 [2] 位判断命令类型create，通过第 [3] 位拿到项目名称test-project
 
-**如果你能理解下面全部的案例，那你的闭包就算是真正掌握了。**
+---
+
+**2. 使用commander**
+
+node的命令行解析最常用的就是commander库，来简化复杂cli参数操作
+
+我们首先需要先安装commander库 ,npm install commander --save 
+
+我们可能还需要安装一个mkdirp库 ,npm install mkdirp --save 
+
+（我们现在的参数简单可以不使用commander，直接用process.argv[3]获取名称，但是为了之后会复杂的命令行，这里也先使用commander）
+
+**创建项目**
+
+我们修改bin.js 为如下内容。
+
 ```
-　　var name = "The Window";
-　　var object = {
-　　　　name : "My Object",
-　　　　getNameFunc : function(){
-　　　　　　return function(){
-　　　　　　　　return this.name;
-　　　　　　};
-　　　　}
-　　};
-　　alert(object.getNameFunc()());//The Window
+#!/usr/bin/env node
+
+const program = require("commander");
+const version = require("../package.json").version;
+
+program.version(version, "-v, --version");
+
+program
+  .command("create <app-name>")
+  .description("使用 my-cli 创建一个新的项目")
+  .option("-d --dir <dir>", "创建目录")
+  .action(name => {
+    const create = require("./create")
+    create(name)
+  });
+
+program.parse(process.argv);
 ```
+
+process.cwd()获取工作区目录，和用户传入项目名称拼接起来
+
+（创建文件夹我们使用mkdirp包，可以避免我们一级一级的创建目录）
+
+修改bin.js的action方法：
+
+commander 解析完成后会触发action回调方法
+
+命令行执行：my-cli -v
+
+输出：1.0.0
+
+命令行执行： my-cli create test-project
+
+输出：创建成功
+
+并在命令行所在目录创建了一个test-project文件夹, 目前目录的文件结构如下。
+
 ```
-　  var name = "The Window";
-　　var object = {
-　　　　name : "My Object",
-　　　　getNameFunc : function(){
-　　　　　　var that = this;
-　　　　　　return function(){
-　　　　　　　　return that.name;
-　　　　　　};
-　　　　}
-　　};
-　　alert(object.getNameFunc()());//My Object
+├── lib
+│   ├── bin.js
+│   └── create
+│       └── index.js
+├── package-lock.json
+├── package.json
+└── test-project
 ```
+
+**模板**
+
+首先需要先列出我们的模板包含哪些文件，一个最基础版的vue项目模板是这样的：
+
 ```
-function fun(n,o) {
-  console.log(o)
-  return {
-    fun:function(m){
-      return fun(m,n);
+│- src
+│  ├── main.js
+│  └── App.vue
+│  └── components
+│       └── HelloWorld.vue
+├── index.html
+├── package.json
+```
+
+和我们创建的结构已经很像了，接下来我们需要优化creat/index函数
+
+
+```
+const path = require("path");
+const fs = require("../utils/fs-promise");
+const install = require("../utils/install");
+
+module.exports = async function (name) {
+  const projectDir = path.join(process.cwd(), name);
+  await fs.mkdirp(projectDir);
+  console.log(`创建${name}文件夹成功`);
+  fs.readdir('./lib/generator', function (err, files) {
+    for (var i = 0; i < files.length; i++) {
+      const { template, dir, name: fileName } = require(`../generator/${files[i]}`)(name);
+      fs.writeFile(path.join(projectDir, dir, fileName), template.trim());
+      install({ cwd: projectDir });
+      console.log(`创建${fileName}文件成功`);
     }
-  };
-}
-var a = fun(0);  a.fun(1);  a.fun(2);  a.fun(3);//undefined,?,?,?
-var b = fun(0).fun(1).fun(2).fun(3);//undefined,?,?,?
-var c = fun(0).fun(1);  c.fun(2);  c.fun(3);//undefined,?,?,?
+  })
+  
 ```
 
->//问:三行a,b,c的输出分别是什么？
+**结语**
 
+关于进一步优化：
 
-**这是一道非常典型的JS闭包问题。其中嵌套了三层fun函数，搞清楚每层fun的函数是那个fun函数尤为重要。**
+更多功能与健壮 例如指定目录创建项目，目录不存在等情况
+chalk和ora优化log，给用户更好的反馈
+通过inquirer问询用户得到更多的选择：模板vue-router，vuex等更多初始化模板功能，eslint
+更多的功能：
 
->//答案：
-//a: undefined,0,0,0
-//b: undefined,0,1,2
-//c: undefined,0,1,1
+内置 webpack 配置
+一键发布服务器
+其实要学会善用第三方库，你会发现我们上面的每个模块都有第三方库的身影，我们只是将这些功能组装起来，再结合我们的想法进一步封装。
 
-**都答对了么？如果都答对了恭喜你在js闭包问题当中几乎没什么可以难住你了。**
+虽然有vue-cli，create-react-app这些已有的脚手架，但是我们还是可能在某些情况下需要自己实现脚手架部分功能，根据公司的业务来封装，减少重复性工作，或者了解一下内部原理
 
-
-#Happy hacking!

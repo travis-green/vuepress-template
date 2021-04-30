@@ -1,27 +1,18 @@
 module.exports = {
   base: '',
   locales: {
-    // 键名是该语言所属的子路径
+    // 键名是该语言所属的子路径    <img src="./assets/wechat.jpg" width="140" />| <img src="./assets/alipay.jpg" width="140" />
     // 作为特例，默认语言可以使用 '/' 作为其路径。
     '/': {
       lang: 'zh-CN',
-      title: 'Travis 个人博客',
+      title: 'Travis Blog',
       description: '陶启航的博客'
     }
   },
   plugins: [
-    '@vuepress/back-to-top',
-    ['qrcode', {
-      // "/" and "/zh/" correspond to the path set by locales
-      labelText: {
-        "/": "二维码"
-      },
-      size: 'small',
-      channel: true
-    }]
+    '@vuepress/back-to-top'
   ],
   themeConfig: {
-
     locales: {
       '/': {
         // 多语言下拉菜单的标题
@@ -43,23 +34,23 @@ module.exports = {
           { text: '前端', link: '/zh/guide/', ariaLabel: '指南' },
           { text: '后端', link: '/zh/resource/', ariaLabel: '资源' },
           { text: 'Github', link: 'https://github.com/travis-green' },
-          { text: '个人网站', link: 'https://forum.alipay.com/developer/1100222333' },
           { text: '微信社区', link: 'https://developers.weixin.qq.com/community/personal/oCJUsw0kGA9yI6HZLQmlfwr5XKKA' },
           { text: '支付宝社区', link: 'https://forum.alipay.com/developer/1100222' }
         ],
         sidebar: {
           '/zh/guide/': [
             '',
-            'theme',
+            'designpatterns',
+            'wechatminimechanism',
             'plugin',
             'jsDom',
-            'buildcli',
             'proxy',
           ],
           '/zh/resource/': [
             '',
             'server',
-            'sql'
+            'sql',
+            'http2'
           ],
         }
       }
@@ -68,6 +59,19 @@ module.exports = {
 
 }
 
+
+    // ['qrcode', {
+    //   // "/" and "/zh/" correspond to the path set by locales
+    //   labelText: {
+    //     "/": "二维码"
+    //   },
+    //   size: 'small',
+    //   channel: true
+    // }]
+
+// { text: '个人网站', link: 'https://forum.alipay.com/developer/1100222333' },
+// { text: '微信社区', link: 'https://developers.weixin.qq.com/community/personal/oCJUsw0kGA9yI6HZLQmlfwr5XKKA' },
+// { text: '支付宝社区', link: 'https://forum.alipay.com/developer/1100222' }
 // '/': {
 //   selectText: 'Languages',
 //   label: 'English',
