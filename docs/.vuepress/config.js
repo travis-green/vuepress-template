@@ -5,7 +5,7 @@ module.exports = {
     // 作为特例，默认语言可以使用 '/' 作为其路径。
     '/': {
       lang: 'zh-CN',
-      title: 'Travis Blog',
+      title: '桃子🍑·Blog',
       description: '陶启航的博客'
     }
   },
