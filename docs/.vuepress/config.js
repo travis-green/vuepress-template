@@ -31,7 +31,7 @@ module.exports = {
         // 当前 locale 的 algolia docsearch 选项
         algolia: {},
         nav: [
-          { text: '前端', link: '/zh/guide/', ariaLabel: '指南' },
+          { text: '前1端', link: '/zh/guide/', ariaLabel: '指南' },
           { text: '后端', link: '/zh/resource/', ariaLabel: '资源' },
           { text: 'Github', link: 'https://github.com/travis-green' },
           { text: '微信社区', link: 'https://developers.weixin.qq.com/community/personal/oCJUsw0kGA9yI6HZLQmlfwr5XKKA' },
