@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>理解什么是DOM | 桃子🍑·Blog</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    
+    <meta name="description" content="陶启航的博客">
+    
+    <link rel="preload" href="/assets/css/0.styles.895620e1.css" as="style"><link rel="preload" href="/assets/js/app.5ba1fee4.js" as="script"><link rel="preload" href="/assets/js/3.2a10d64a.js" as="script"><link rel="preload" href="/assets/js/16.ef15caa2.js" as="script"><link rel="prefetch" href="/assets/js/10.38b5f51f.js"><link rel="prefetch" href="/assets/js/11.a84b5578.js"><link rel="prefetch" href="/assets/js/12.4f4b0b31.js"><link rel="prefetch" href="/assets/js/13.6dd7c9d7.js"><link rel="prefetch" href="/assets/js/14.22861748.js"><link rel="prefetch" href="/assets/js/15.200b9fe9.js"><link rel="prefetch" href="/assets/js/17.480df997.js"><link rel="prefetch" href="/assets/js/18.a8e75760.js"><link rel="prefetch" href="/assets/js/19.bd084016.js"><link rel="prefetch" href="/assets/js/20.6981a195.js"><link rel="prefetch" href="/assets/js/21.41a6462b.js"><link rel="prefetch" href="/assets/js/22.b58f10a8.js"><link rel="prefetch" href="/assets/js/23.5c129feb.js"><link rel="prefetch" href="/assets/js/24.4887b391.js"><link rel="prefetch" href="/assets/js/4.35efff24.js"><link rel="prefetch" href="/assets/js/5.7a14d7a5.js"><link rel="prefetch" href="/assets/js/6.5772e90d.js"><link rel="prefetch" href="/assets/js/7.7e1c1509.js"><link rel="prefetch" href="/assets/js/8.dc3922b5.js"><link rel="prefetch" href="/assets/js/9.de9f3ee1.js"><link rel="prefetch" href="/assets/js/vendors~docsearch.e78d7987.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.895620e1.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">桃子🍑·Blog</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/zh/guide/" class="nav-link router-link-active">
+  前1端
+</a></div><div class="nav-item"><a href="/zh/resource/" class="nav-link">
+  后端
+</a></div><div class="nav-item"><a href="https://github.com/travis-green" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://developers.weixin.qq.com/community/personal/oCJUsw0kGA9yI6HZLQmlfwr5XKKA" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  微信社区
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://forum.alipay.com/developer/1100222" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  支付宝社区
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/zh/guide/" class="nav-link router-link-active">
+  前1端
+</a></div><div class="nav-item"><a href="/zh/resource/" class="nav-link">
+  后端
+</a></div><div class="nav-item"><a href="https://github.com/travis-green" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://developers.weixin.qq.com/community/personal/oCJUsw0kGA9yI6HZLQmlfwr5XKKA" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  微信社区
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://forum.alipay.com/developer/1100222" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  支付宝社区
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><a href="/zh/guide/" aria-current="page" class="sidebar-link">如何写一个自己专属的脚手架</a></li><li><a href="/zh/guide/designpatterns.html" class="sidebar-link">前端设计模式</a></li><li><a href="/zh/guide/wechatminimechanism.html" class="sidebar-link">小程序的原理和运行机制</a></li><li><a href="/zh/guide/plugin.html" class="sidebar-link">埋点lint工具，自动化埋点必看</a></li><li><a href="/zh/guide/jsDom.html" aria-current="page" class="active sidebar-link">理解什么是DOM</a></li><li><a href="/zh/guide/proxy.html" class="sidebar-link">重写小程序（Proxy）</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="理解什么是dom"><a href="#理解什么是dom" class="header-anchor">#</a> 理解什么是DOM</h1> <hr> <p>##DOM
+什么是DOM？简单地说DOM是一套对文档内容进行抽象和概念化的方法。
+<strong>  W3C给出的DOM定义是这样的：“一个与系统平台和编程语言无关的接口，程序和脚本以通过这个接口动态的访问和修改文档的内容，结构和样式。”</strong>
+  那么楼主在这里主要是跟大家分享下JavaScript中如何使用DOM，当然如果会用JavaScript使用DOM，当你使用PHP或是Python之类的语言来解析XML文档的时候，我们获得的DOM新知识将会有很大的帮助。
+<strong>DOM中的“D&quot;，”O&quot;，“M”。</strong>
+  “D”当然就是“document”了，没有document的存在DOM也就无从谈起，浏览器在加载完我们所写的网页时，DOM就在后台产生了。浏览器将之转化为一个可读的文档对象。
+  &quot;O&quot;呢，就是“object”,JavaScript中对象分为三种，分别是：用户自定义对象（用户自行创建的对象），宿主对象（浏览器提供的对象）和内建对象（JavaScript中的内建对象，如：Math，Date）。对象就是我们操作的主要目标。
+  “M&quot;怎么说呢，说它是”Modle&quot;可以，也能说是“Map”本身DOM的存在就是让我们对整个文档有一个把握，所以说它是模型有道理，说它是地图也有道理。这里我们姑且把它当做是Map吧，既然是地图，那必然要有诸如图例，方向，等高线和比例尺之类的图例。我们要向看懂地图就需要对这些图例了如指掌。对于DOM同样如此，DOM把文档表示成一棵树（这里的“树”是数学上的概念），也是我们理解和运用这一模型的关键。家谱树模型非常适合用来表示一分用（X)HTML编写的文档。
+<strong>比如：</strong></p> <div class="language- extra-class"><pre class="language-text"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;title&gt;Canvas&lt;/title&gt;
+&lt;style&gt;
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1 title=&quot;example&quot;&gt;Examples&lt;/h1&gt;
+  &lt;p&gt;A example&lt;/p&gt;
+  &lt;ul id=&quot;number&quot;&gt;
+    &lt;li class=&quot;one&quot;&gt;第一条&lt;/li&gt;
+    &lt;li class=&quot;two&quot;&gt;第二条&lt;/li&gt;
+    &lt;li class=&quot;three&quot;&gt;第三条&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div><p><img src="http://img.blog.csdn.net/20151125205707478" alt="效果">
+##节点
+    节点是个网络术语，他表示的是构成网络中的一个连接点。一个网络就是由一些节点所构成的集合。
+<strong>那么在DOM中同样存在节点，浏览器所解析的文档就是由一个个的节点构成，这个节点就是我们上面所画出来的树中的树叶和树枝。那么这些树叶和树枝被分为了三种：元素节点，属性节点，文本节点。，接下来我们一一看一下：</strong> <strong>1.元素节点</strong></p> <blockquote><p>元素节点其实很好理解，我们文档中诸如body,p,ul,li等标签都是一个元素节点。
+标签的名字就是元素节点的名字。
+<strong>比如：</strong></p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>&lt;p&gt;A example&lt;/p&gt;
+</code></pre></div><p><strong>这里的p标签就是一个元素节点，p就是元素节点的名称。</strong></p> <p><strong>2.属性节点</strong></p> <blockquote><p>属性节点是为了对元素做出更具体的描述，比如我们文档中：</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>&lt;h1 title=&quot;example&quot;&gt;Examples&lt;/h1&gt;
+</code></pre></div><p><strong>这里的title就是一个属性节点，属性节点用用比较广泛，CSS中的诸如style，id,class我们都可以把它看做是一个属性节点访问。</strong></p> <p><strong>3.文本节点</strong>
+**文本节点就更容易理解了，就是文本内容嘛。**比如：</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;ul&gt;
+    &lt;li&gt;第一条&lt;/li&gt;
+    &lt;li&gt;第二条&lt;/li&gt;
+    &lt;li&gt;第三条&lt;/li&gt;
+  &lt;/ul&gt;
+</code></pre></div><p><strong>在XHTML中文本节点被包含在元素节点的内部，当并非所有的元素节点都包含文本节点，就像这里的ul标签没有文本内容，它包含了li标签，li有文本内容，里面的内容就构成了文本节点。</strong>
+##获取元素</p> <blockquote><p>有三种方法可以获取元素节点，分别是通过元素ID（getElementByID),通过标签名字（getElementByTagName），通过类名字（getELementByClassName）来获取：
+<strong>1.getElementById</strong> <strong>注意：JavaScript区分大小写，getELementById这几个字母不能写错了</strong></p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>&lt;script&gt;
+   var number=document.getElementById(&quot;number&quot;);
+   alert(typeof number);
+&lt;/script&gt;
+</code></pre></div><p>我们会得到 如图所示的alert对话框：
+<img src="http://img.blog.csdn.net/20151125205749111" alt="object对象"> <strong>由此我们也能更深入的理解了HTML中处处皆对象的概念。</strong></p> <p><strong>2.getElementByTagName</strong>
+getElementTagName会得到一个数组，这个数组对应着给定标签的每一个元素，
+<strong>比如：</strong></p> <div class="language- extra-class"><pre class="language-text"><code>var element=document.getElementsByTagName(&quot;li&quot;);
+for(var i=0;i&lt;element.length;i++){
+alert(typeof element[i]);
+}
+</code></pre></div><p>我们依然可以看到：
+<img src="http://img.blog.csdn.net/20151125205749111" alt="object对象"> <strong>3.getElementByClassName</strong></p> <div class="language- extra-class"><pre class="language-text"><code>var element=document.getElementsByClassName(&quot;one&quot;);
+alert(typeof element);
+</code></pre></div><p>我们仍旧可以看到：
+<img src="http://img.blog.csdn.net/20151125205749111" alt="object对象">
+到这里我们就学完了获取元素的三种方法，<strong>我想你一定厌倦了看那么多变的显示着object的alert对话框，你一定也明白了文档中每个节点都是一个对象。</strong>
+那么我们下一次就要说一下<strong>节点对象的属性和方法</strong>了。利用这些方法我们就可以随心所欲的改变文档中的内容，甚至改变某些元素的属性。
+<strong>下面是对本次学习的一个总结：</strong></p> <blockquote><p>一份文档就是一棵节点树.</p></blockquote> <blockquote><p>节点分为不同的类型，元素节点，属性节点和文本节点等。</p></blockquote> <blockquote><p>getElementByTagName和getElementByClassName将返回一个对象数组，他们对应着一组特定的元素节点。</p></blockquote> <blockquote><p>每个节点都是一个对象。
+#Happy hacking !</p></blockquote></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/zh/guide/plugin.html" class="prev">
+        埋点lint工具，自动化埋点必看
+      </a></span> <span class="next"><a href="/zh/guide/proxy.html">
+        重写小程序（Proxy）
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.5ba1fee4.js" defer></script><script src="/assets/js/3.2a10d64a.js" defer></script><script src="/assets/js/16.ef15caa2.js" defer></script>
+  </body>
+</html>

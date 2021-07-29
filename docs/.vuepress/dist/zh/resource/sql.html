@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>最简单的图灵测试-验证码 | 桃子🍑·Blog</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    
+    <meta name="description" content="陶启航的博客">
+    
+    <link rel="preload" href="/assets/css/0.styles.895620e1.css" as="style"><link rel="preload" href="/assets/js/app.5ba1fee4.js" as="script"><link rel="preload" href="/assets/js/3.2a10d64a.js" as="script"><link rel="preload" href="/assets/js/24.4887b391.js" as="script"><link rel="prefetch" href="/assets/js/10.38b5f51f.js"><link rel="prefetch" href="/assets/js/11.a84b5578.js"><link rel="prefetch" href="/assets/js/12.4f4b0b31.js"><link rel="prefetch" href="/assets/js/13.6dd7c9d7.js"><link rel="prefetch" href="/assets/js/14.22861748.js"><link rel="prefetch" href="/assets/js/15.200b9fe9.js"><link rel="prefetch" href="/assets/js/16.ef15caa2.js"><link rel="prefetch" href="/assets/js/17.480df997.js"><link rel="prefetch" href="/assets/js/18.a8e75760.js"><link rel="prefetch" href="/assets/js/19.bd084016.js"><link rel="prefetch" href="/assets/js/20.6981a195.js"><link rel="prefetch" href="/assets/js/21.41a6462b.js"><link rel="prefetch" href="/assets/js/22.b58f10a8.js"><link rel="prefetch" href="/assets/js/23.5c129feb.js"><link rel="prefetch" href="/assets/js/4.35efff24.js"><link rel="prefetch" href="/assets/js/5.7a14d7a5.js"><link rel="prefetch" href="/assets/js/6.5772e90d.js"><link rel="prefetch" href="/assets/js/7.7e1c1509.js"><link rel="prefetch" href="/assets/js/8.dc3922b5.js"><link rel="prefetch" href="/assets/js/9.de9f3ee1.js"><link rel="prefetch" href="/assets/js/vendors~docsearch.e78d7987.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.895620e1.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">桃子🍑·Blog</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/zh/guide/" class="nav-link">
+  前1端
+</a></div><div class="nav-item"><a href="/zh/resource/" class="nav-link router-link-active">
+  后端
+</a></div><div class="nav-item"><a href="https://github.com/travis-green" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://developers.weixin.qq.com/community/personal/oCJUsw0kGA9yI6HZLQmlfwr5XKKA" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  微信社区
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://forum.alipay.com/developer/1100222" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  支付宝社区
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/zh/guide/" class="nav-link">
+  前1端
+</a></div><div class="nav-item"><a href="/zh/resource/" class="nav-link router-link-active">
+  后端
+</a></div><div class="nav-item"><a href="https://github.com/travis-green" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://developers.weixin.qq.com/community/personal/oCJUsw0kGA9yI6HZLQmlfwr5XKKA" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  微信社区
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://forum.alipay.com/developer/1100222" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  支付宝社区
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><a href="/zh/resource/" aria-current="page" class="sidebar-link">SQl语句大全</a></li><li><a href="/zh/resource/server.html" class="sidebar-link">ElasticSearch</a></li><li><a href="/zh/resource/sql.html" aria-current="page" class="active sidebar-link">最简单的图灵测试-验证码</a></li><li><a href="/zh/resource/http2.html" class="sidebar-link">Http 2.0 新增了哪些特性</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="最简单的图灵测试-验证码"><a href="#最简单的图灵测试-验证码" class="header-anchor">#</a> 最简单的图灵测试-验证码</h1> <p>-验证码（CAPTCHA）是“Completely Automated Public Turing test to tell Computers and Humans Apart”（全自动区分计算机和人类的图灵测试）的缩写，是一种区分用户是计算机还是人的公共全自动程序。可以防止：恶意破解密码、刷票、论坛灌水，有效防止某个黑客对某一个特定注册用户用特定程序暴力破解方式进行不断的登陆尝试，实际上用验证码是现在很多网站通行的方式，我们利用比较简易的方式实现了这个功能。这个问题可以由计算机生成并评判，但是必须只有人类才能解答。由于计算机无法解答CAPTCHA的问题，所以回答出问题的用户就可以被认为是人类.
+<strong>以上是百度百科给出的解释,简单的说验证码是用来区分人还是机器的,我们需要明白的是很多黑客会写出特定的程序来一次一次的尝试用户密码直到成功登录窃取用户信息。因此验证码就显得尤为必要了,有了验证码,黑客就必须一遍遍的输入验证码才能继续尝试用户密码(当然,没有黑客有这么多精力去干这种蠢事了),这就确保了用户信息的安全性,防止被黑客窃取。</strong>
+#验证码怎么做出来的
+<strong>从我们平时上网的经验来看,验证码一般是四位,由数字和字母组成。</strong> <strong>那么接下来楼主将带领大家一步步用JavaScript做出一个验证码脚本!</strong>
+先给出成品，方便大家理解：</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+     &lt;style&gt;
+        #securityCode{
+            background-color: #008000;
+            width:70px;
+            height:30px;
+            font-family: '楷体', serif;
+            font-size: 20px;
+            color:white;
+        }
+    &lt;/style&gt;
+    &lt;script language=&quot;JavaScript&quot; type=&quot;text/javascript&quot;&gt;
+      function createCode(){
+            var code=new Array(0,1,2,3,4,5,6,7,8,9,
+                    'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
+            var codeNumber;
+            securityCode=&quot;&quot;;//全局变量,方便后续验证
+            for(var i=0;i&lt;4;i++){
+                codeNumber=Math.floor(Math.random()*36);
+                securityCode+=code[codeNumber];
+            }
+            document.getElementById(&quot;securityCode&quot;).value=securityCode;
+        }
+        function verify(){
+            var enterCode=document.getElementById(&quot;enterCode&quot;).value;
+            if(enterCode.toUpperCase()==securityCode){
+                alert(&quot;输入正确,通过验证!&quot;);
+            }
+            else{
+                enterCode.value=&quot;&quot;;
+                createCode();
+            }
+        }
+    &lt;/script&gt;
+       &lt;title&gt;Jizhen Tan&lt;/title&gt;
+&lt;/head&gt;
+&lt;body  onLoad=&quot;checkCookie()&quot; &gt;
+     &lt;input type=&quot;text&quot; id=&quot;enterCode&quot;&gt;&lt;br/&gt;
+     &lt;input type=&quot;button&quot; id=&quot;securityCode&quot;   onclick=&quot;createCode()&quot;&gt;
+     &lt;a href=&quot;###&quot; onclick=&quot;createCode()&quot;&gt;看不清楚&lt;/a&gt;&lt;br/&gt;
+     &lt;input type=&quot;button&quot; style=&quot;background-color: #0099FF; font-size: 20px;&quot;value=&quot;验证&quot; onclick=&quot;verify()&quot;&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div><p>1.既然是四位验证码,我们的思路就要打开一些了,首先我们需要一个数组来储存字母和数字。</p> <div class="language- extra-class"><pre class="language-text"><code> var code=new Array(0,1,2,3,4,5,6,7,8,9,
+                    'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
+</code></pre></div><p>2.然后我们需要让它随机显示数组中的元素，这里我们建立一个codeNumber变量来随机显示的数字,但我们需要的是四位验证码，而现在数组中的元素都是单个的，怎么办呢？简单！我们再建立一个securityCode变量来储存数组中的元素不就得了。代码如下：</p> <div class="language- extra-class"><pre class="language-text"><code> var codeNumber;
+            securityCode=&quot;&quot;;//全局变量,方便后续验证
+            for(var i=0;i&lt;4;i++){
+                codeNumber=Math.floor(Math.random()*36);
+                securityCode+=code[codeNumber];
+            }
+</code></pre></div><p><strong>可以看出此时securityNumber变量储存的就是一个四位随机验证码</strong>
+3.好了，经过简单的两步，我们就得到了四位验证码。我们将它放在一个createCode函数中。</p> <div class="language- extra-class"><pre class="language-text"><code>   function createCode(){
+            var code=new Array(0,1,2,3,4,5,6,7,8,9,
+                    'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
+            var codeNumber;
+            securityCode=&quot;&quot;;//全局变量,方便后续验证
+            for(var i=0;i&lt;4;i++){
+                codeNumber=Math.floor(Math.random()*36);
+                securityCode+=code[codeNumber];
+            }
+            document.getElementById(&quot;securityCode&quot;).value=securityCode;
+        }
+</code></pre></div><p>4.接下来我们创建一个验证机制：</p> <div class="language- extra-class"><pre class="language-text"><code>  function verify(){
+            var enterCode=document.getElementById(&quot;enterCode&quot;).value;
+            if(enterCode.toUpperCase()==securityCode){
+                alert(&quot;输入正确,通过验证!&quot;);
+            }
+            else{
+                enterCode.value=&quot;&quot;;
+                createCode();
+            }
+        }
+</code></pre></div><p>5.小小修饰下验证码：</p> <div class="language- extra-class"><pre class="language-text"><code> &lt;style&gt;
+        #securityCode{
+            background-color: #008000;
+            width:70px;
+            height:30px;
+            font-family: '楷体', serif;
+            font-size: 20px;
+            color:white;
+        }
+    &lt;/style&gt;
+</code></pre></div><p>#结束</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/zh/resource/server.html" class="prev">
+        ElasticSearch
+      </a></span> <span class="next"><a href="/zh/resource/http2.html">
+        Http 2.0 新增了哪些特性
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.5ba1fee4.js" defer></script><script src="/assets/js/3.2a10d64a.js" defer></script><script src="/assets/js/24.4887b391.js" defer></script>
+  </body>
+</html>
